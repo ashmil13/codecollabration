@@ -16,7 +16,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin:["http://localhost:5173",process.env.FRONTEND_URL],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -37,3 +37,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running in development mode on port ${PORT}`);
   console.log(`📡 Health Check URL: http://localhost:${PORT}/`);
 });
+
+export default app;
