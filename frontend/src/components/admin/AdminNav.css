@@ -1,0 +1,119 @@
+.admin-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100vh;
+  background-color: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 2px solid #0ea5e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+  color: #0369a1;
+  box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.1);
+}
+
+.avatar-initials {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.admin-user-details {
+  text-align: center;
+}
+
+.admin-name {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.admin-role-tag {
+  font-size: 11px;
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  text-transform: uppercase;
+}
+
+.admin-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  color: #334155;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.admin-menu-item:hover {
+  background-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.admin-menu-item.active {
+  color: #0ea5e9;
+  background-color: rgba(14, 165, 233, 0.15);
+  font-weight: 600;
+}
+
+.admin-sidebar-bottom {
+  margin-top: auto;
+}
+
+.admin-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  text-align: left;
+}
+
+.admin-logout-btn:hover {
+  background-color: #fef2f2;
+}

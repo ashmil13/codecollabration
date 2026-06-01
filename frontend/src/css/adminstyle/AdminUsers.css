@@ -1,0 +1,310 @@
+.admin-users-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+}
+
+.admin-users-header {
+  margin-bottom: 2rem;
+}
+
+.header-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-icon {
+  color: #0ea5e9;
+}
+
+.admin-users-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: #0f172a;
+}
+
+.admin-users-header p {
+  color: #475569;
+  margin: 0;
+  font-size: 14px;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+}
+
+.alert-error {
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+}
+
+.alert-success {
+  color: #15803d;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: #475569;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(14, 165, 233, 0.1);
+  border-radius: 50%;
+  border-top-color: #0ea5e9;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.empty-icon {
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  margin: 0 0 6px 0;
+  color: #0f172a;
+}
+
+.empty-state p {
+  color: #475569;
+  margin: 0;
+  font-size: 14px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.users-table th {
+  background-color: #f8fafc;
+  padding: 12px 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #475569;
+  border-bottom: 1px solid #cbd5e1;
+  font-weight: 600;
+}
+
+.users-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.user-row {
+  transition: background-color 0.2s ease;
+}
+
+.user-row:hover {
+  background-color: #f8fafc;
+}
+
+.user-row:last-child td {
+  border-bottom: none;
+}
+
+.current-user-row {
+  background-color: rgba(14, 165, 233, 0.03);
+}
+
+.current-user-row:hover {
+  background-color: rgba(14, 165, 233, 0.05);
+}
+
+.profile-image-cell {
+  width: 60px;
+}
+
+.user-avatar-initials {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name-cell {
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.current-user-badge {
+  font-size: 11px;
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+.row-mail-icon {
+  color: #64748b;
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.email-cell {
+  color: #334155;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-badge.user {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.role-badge.admin {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+.role-badge.superadmin {
+  background-color: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.role-select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  width: 120px;
+}
+
+.role-select:focus {
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+.role-select.user {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.role-select.admin {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.role-select.superadmin {
+  background-color: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.role-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.role-select option {
+  background-color: #ffffff;
+  color: #0f172a;
+  text-transform: none;
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.role-icon {
+  opacity: 0.85;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.delete-action-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-action-btn:hover:not(:disabled) {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.delete-action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
