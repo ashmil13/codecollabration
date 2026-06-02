@@ -500,3 +500,37 @@
   background-color: #fee2e2;
   color: #ef4444;
 }
+
+@media (max-width: 767.98px) {
+  .version-page-container {
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+  .versions-sidebar {
+    width: 100% !important;
+    height: 220px !important;
+    flex-shrink: 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 16px !important;
+  }
+  .code-workspace {
+    height: calc(100vh - 220px) !important;
+    flex-grow: 1 !important;
+  }
+  .editor-container {
+    padding: 15px !important;
+  }
+  .editor-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 12px !important;
+  }
+  .editor-actions {
+    justify-content: flex-end !important;
+  }
+  .editor-title-group {
+    align-items: flex-start !important;
+  }
+}

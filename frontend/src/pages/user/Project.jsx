@@ -90,67 +90,79 @@ function Project() {
   };
 
   return (
-    <div className="upload-page-wrapper">
-      <div className="upload-container">
-        <h2 className="upload-title">Upload Code Project</h2>
+    <div className="upload-page-wrapper py-5 px-3">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-10 col-lg-8 col-xl-6">
+            <div className="upload-container shadow border rounded-3 p-4 p-md-5 bg-white">
+              <h2 className="upload-title text-center fw-bold mb-4 text-dark fs-3">Upload Code Project</h2>
 
-        {message && <p className="upload-success">{message}</p>}
-        {error && <p className="upload-error">{error}</p>}
+              {message && <div className="alert alert-success py-2 px-3 mb-3 text-start" role="alert">{message}</div>}
+              {error && <div className="alert alert-danger py-2 px-3 mb-3 text-start" role="alert">{error}</div>}
 
-        <form onSubmit={handleSubmit}>
-          <div className="upload-form-group">
-            <label className="upload-label" htmlFor="projectName">Project Name</label>
-            <input
-              type="text"
-              id="projectName"
-              className="upload-input"
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
-              placeholder="e.g. My Awesome Web App"
-              required
-            />
-          </div>
-
-          <div className="upload-form-group code-group">
-            <div className="code-header">
-              <label className="upload-label" htmlFor="codeSpace">Enter the Code</label>
-              <div className="code-actions">
-                <label className="import-file-btn" title="Import code from file">
-                  Import File
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label fw-semibold text-secondary small" htmlFor="projectName">Project Name</label>
                   <input
-                    type="file"
-                    onChange={handleImportFile}
-                    style={{ display: 'none' }}
+                    type="text"
+                    id="projectName"
+                    className="form-control form-control-lg fs-6"
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                    placeholder="e.g. My Awesome Web App"
+                    required
                   />
-                </label>
-                <button
-                  type="button"
-                  className="clear-code-btn"
-                  onClick={handleClearCode}
-                  title="Clear code space"
-                >
-                  Clear Code
-                </button>
-              </div>
-            </div>
-            <textarea
-              id="codeSpace"
-              className="upload-textarea"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Paste or write your code here..."
-              required
-            />
-          </div>
+                </div>
 
-          <button
-            type="submit"
-            className="upload-btn"
-            disabled={loading}
-          >
-            {loading ? 'Uploading...' : 'Upload Project'}
-          </button>
-        </form>
+                <div className="mb-4">
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <label className="form-label fw-semibold text-secondary small mb-0" htmlFor="codeSpace">Enter the Code</label>
+                    <div className="d-flex gap-2">
+                      <label className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" title="Import code from file" style={{ cursor: 'pointer' }}>
+                        <span>Import File</span>
+                        <input
+                          type="file"
+                          onChange={handleImportFile}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={handleClearCode}
+                        title="Clear code space"
+                      >
+                        Clear Code
+                      </button>
+                    </div>
+                  </div>
+                  <textarea
+                    id="codeSpace"
+                    className="form-control font-monospace fs-6"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    placeholder="Paste or write your code here..."
+                    style={{ height: '250px', resize: 'vertical' }}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 py-2.5 fw-semibold"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span className="d-flex align-items-center justify-content-center gap-2">
+                      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span>Uploading...</span>
+                    </span>
+                  ) : 'Upload Project'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

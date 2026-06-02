@@ -117,3 +117,18 @@
 .admin-logout-btn:hover {
   background-color: #fef2f2;
 }
+
+@media (max-width: 767.98px) {
+  .admin-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 0 !important;
+  }
+  .sidebar-content-wrapper {
+    padding: 15px 20px;
+    border-top: 1px solid #e2e8f0;
+  }
+}

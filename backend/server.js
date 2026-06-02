@@ -36,8 +36,8 @@ app.use('/api', superAdminRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running in development mode on port ${PORT}`);
-  console.log(`📡 Health Check URL: http://localhost:${PORT}/`);
+  console.log(` Server running in development mode on port ${PORT}`);
+  console.log(` Health Check URL: http://localhost:${PORT}/`);
 });
 
 export default app;

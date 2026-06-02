@@ -61,117 +61,129 @@ function SuperVersion() {
     : versions.filter(v => v.projectName === selectedProjectName);
 
   return (
-    <div className="admin-versions-container">
-      <div className="admin-versions-header">
-        <div className="header-title-wrapper">
-          <GitBranch className="header-icon" size={28} />
-          <div>
-            <h1>Manage Project Versions</h1>
-            <p>Track history files, code commits, and delete redundant versions</p>
-          </div>
+    <div className="container-fluid py-4">
+      <div className="row">
+        <div className="col-12">
+          <header className="mb-4">
+            <div className="d-flex align-items-center gap-2">
+              <GitBranch className="text-primary" size={28} />
+              <div>
+                <h1 className="h3 fw-bold mb-0">Manage Project Versions</h1>
+                <p className="text-muted mb-0 small">Track history files, code commits, and delete redundant versions</p>
+              </div>
+            </div>
+          </header>
+
+          {error && (
+            <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
+              <AlertCircle size={20} />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {successMsg && (
+            <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
+              <CheckCircle size={20} />
+              <span>{successMsg}</span>
+            </div>
+          )}
+
+          {!loading && versions.length > 0 && (
+            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 p-3 bg-white border rounded shadow-sm">
+              <div className="d-flex align-items-center gap-2">
+                <span className="text-secondary"><Folder size={18} /></span>
+                <label htmlFor="project-filter" className="fw-semibold text-secondary small mb-0">Project:</label>
+                <select
+                  id="project-filter"
+                  value={selectedProjectName}
+                  onChange={(e) => setSelectedProjectName(e.target.value)}
+                  className="form-select form-select-sm"
+                  style={{ width: 'auto', minWidth: '150px' }}
+                >
+                  {projectNames.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <span className="text-muted small">
+                Showing {filteredVersions.length} of {versions.length} versions
+              </span>
+            </div>
+          )}
+
+          {loading ? (
+            <div className="d-flex flex-column align-items-center justify-content-center py-5">
+              <div className="spinner-border text-primary mb-3" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p className="text-muted">Retrieving code commits...</p>
+            </div>
+          ) : versions.length === 0 ? (
+            <div className="card text-center p-5 border shadow-sm">
+              <GitBranch size={48} className="text-muted mb-3 mx-auto" />
+              <h3 className="h5 fw-bold text-dark">No Versions Found</h3>
+              <p className="text-muted">There are currently no code versions tracked in the database.</p>
+            </div>
+          ) : filteredVersions.length === 0 ? (
+            <div className="card text-center p-5 border shadow-sm">
+              <GitBranch size={48} className="text-muted mb-3 mx-auto" />
+              <h3 className="h5 fw-bold text-dark">No Versions for "{selectedProjectName}"</h3>
+              <p className="text-muted">There are no code versions for the selected project.</p>
+            </div>
+          ) : (
+            <div className="card shadow-sm border border-light overflow-hidden">
+              <div className="table-responsive">
+                <table className="table table-striped table-hover align-middle mb-0">
+                  <thead className="table-light">
+                    <tr>
+                      <th className="px-4 py-3 text-secondary text-uppercase fs-7 fw-bold">Project Name</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">Version</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">Author</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">Committed At</th>
+                      <th className="px-4 py-3 text-center text-secondary text-uppercase fs-7 fw-bold">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredVersions.map((v) => (
+                      <tr key={v._id}>
+                        <td className="px-4 py-3 font-semibold text-dark">
+                          <div className="d-flex align-items-center gap-2">
+                            <Folder className="text-primary opacity-75" size={16} />
+                            <span>{v.projectName || 'Legacy Project'}</span>
+                          </div>
+                        </td>
+                        <td className="py-3">
+                          <span className="badge bg-primary-subtle text-primary border border-primary-subtle fs-7 px-2.5 py-1">V{v.versionNumber}</span>
+                        </td>
+                        <td className="py-3 text-muted">
+                          <div className="d-flex align-items-center gap-1">
+                            <User size={14} className="text-secondary" />
+                            <span>{v.userName || 'Unknown User'}</span>
+                          </div>
+                        </td>
+                        <td className="py-3 text-muted">
+                          {new Date(v.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <button
+                            onClick={() => handleDelete(v._id, v.projectName, v.versionNumber)}
+                            className="btn btn-sm btn-outline-danger"
+                            title={`Delete Version ${v.versionNumber}`}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {error && (
-        <div className="alert alert-error">
-          <AlertCircle size={20} />
-          <span>{error}</span>
-        </div>
-      )}
-
-      {successMsg && (
-        <div className="alert alert-success">
-          <CheckCircle size={20} />
-          <span>{successMsg}</span>
-        </div>
-      )}
-
-      {!loading && versions.length > 0 && (
-        <div className="filter-section-wrapper">
-          <div className="filter-box">
-            <span className="filter-icon-lbl"><Folder size={16} /></span>
-            <label htmlFor="project-filter" className="filter-lbl">Project:</label>
-            <select
-              id="project-filter"
-              value={selectedProjectName}
-              onChange={(e) => setSelectedProjectName(e.target.value)}
-              className="project-filter-select"
-            >
-              {projectNames.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <span className="filtered-count">
-            Showing {filteredVersions.length} of {versions.length} versions
-          </span>
-        </div>
-      )}
-
-      {loading ? (
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Retrieving code commits...</p>
-        </div>
-      ) : versions.length === 0 ? (
-        <div className="empty-state">
-          <GitBranch size={48} className="empty-icon" />
-          <h3>No Versions Found</h3>
-          <p>There are currently no code versions tracked in the database.</p>
-        </div>
-      ) : filteredVersions.length === 0 ? (
-        <div className="empty-state">
-          <GitBranch size={48} className="empty-icon" />
-          <h3>No Versions for "{selectedProjectName}"</h3>
-          <p>There are no code versions for the selected project.</p>
-        </div>
-      ) : (
-        <div className="table-responsive">
-          <table className="versions-table">
-            <thead>
-              <tr>
-                <th>Project Name</th>
-                <th>Version</th>
-                <th>Author</th>
-                <th>Committed At</th>
-                <th className="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredVersions.map((v) => (
-                <tr key={v._id} className="version-row">
-                  <td className="project-name-cell">
-                    <Folder className="row-folder-icon" size={16} />
-                    <span className="project-name-text">{v.projectName || 'Legacy Project'}</span>
-                  </td>
-                  <td className="version-number-cell">
-                    <span className="version-tag">V{v.versionNumber}</span>
-                  </td>
-                  <td className="author-cell">
-                    <User className="row-user-icon" size={14} />
-                    <span>{v.userName || 'Unknown User'}</span>
-                  </td>
-                  <td className="date-cell">
-                    <Calendar className="row-calendar-icon" size={14} />
-                    <span>{new Date(v.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</span>
-                  </td>
-                  <td className="actions-cell text-center">
-                    <button
-                      onClick={() => handleDelete(v._id, v.projectName, v.versionNumber)}
-                      className="delete-action-btn"
-                      title={`Delete Version ${v.versionNumber}`}
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
     </div>
   );
 }

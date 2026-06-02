@@ -95,138 +95,149 @@ function SuperUserList() {
         }
     };
 
-    return (
-        <div className="admin-users-container">
-            <div className="admin-users-header">
-                <div className="header-title-wrapper">
-                    <User className="header-icon" size={28} />
-                    <div>
-                        <h1>Manage Users</h1>
-                        <p>Control user accounts, track their system roles, and revoke access</p>
-                    </div>
-                </div>
+  return (
+    <div className="container-fluid py-4">
+      <div className="row">
+        <div className="col-12">
+          <header className="mb-4">
+            <div className="d-flex align-items-center gap-2">
+              <User className="text-primary" size={28} />
+              <div>
+                <h1 className="h3 fw-bold mb-0">Manage Users</h1>
+                <p className="text-muted mb-0 small">Control user accounts, track their system roles, and revoke access</p>
+              </div>
             </div>
+          </header>
 
-            {error && (
-                <div className="alert alert-error">
-                    <AlertCircle size={20} />
-                    <span>{error}</span>
-                </div>
-            )}
+          {error && (
+            <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
+              <AlertCircle size={20} />
+              <span>{error}</span>
+            </div>
+          )}
 
-            {successMsg && (
-                <div className="alert alert-success">
-                    <CheckCircle size={20} />
-                    <span>{successMsg}</span>
-                </div>
-            )}
+          {successMsg && (
+            <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
+              <CheckCircle size={20} />
+              <span>{successMsg}</span>
+            </div>
+          )}
 
-            {loading ? (
-                <div className="loading-state">
-                    <div className="spinner"></div>
-                    <p>Retrieving user profiles...</p>
-                </div>
-            ) : users.length === 0 ? (
-                <div className="empty-state">
-                    <User size={48} className="empty-icon" />
-                    <h3>No Users Found</h3>
-                    <p>There are no registered users in the database.</p>
-                </div>
-            ) : (
-                <div className="table-responsive">
-                    <table className="users-table">
-                        <thead>
-                            <tr>
-                                <th>Profile</th>
-                                <th>Name</th>
-                                <th>Email Address</th>
-                                <th>System Role</th>
-                                <th className="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map((user) => (
-                                <tr key={user._id} className={`user-row ${user._id === auth?.id ? 'current-user-row' : ''}`}>
-                                    <td className="profile-image-cell">
-                                        <div className="user-avatar-initials">
-                                            {user.name ? user.name.charAt(0).toUpperCase() : '?'}
-                                        </div>
-                                    </td>
-                                    <td className="user-name-cell">
-                                        <span className="user-name-text">{user.name}</span>
-                                        {user._id === auth?.id && <span className="current-user-badge">You</span>}
-                                    </td>
-                                    <td className="email-cell">
-                                        <Mail className="row-mail-icon" size={16} />
-                                        <span>{user.email}</span>
-                                    </td>
-                                    <td className="role-cell">
-                                        {editingUserId === user._id ? (
-                                            <div className="role-selector-wrapper">
-                                                <select
-                                                    value={tempRole}
-                                                    onChange={(e) => setTempRole(e.target.value)}
-                                                    className={`role-select ${tempRole.toLowerCase()}`}
-                                                >
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="SuperAdmin">SuperAdmin</option>
-                                                </select>
-                                            </div>
-                                        ) : (
-                                            <div className={`role-badge ${user.role.toLowerCase()}`}>
-                                                <Shield size={14} className="role-icon" />
-                                                <span>{user.role}</span>
-                                            </div>
-                                        )}
-                                    </td>
-                                    <td className="actions-cell text-center">
-                                        {editingUserId === user._id ? (
-                                            <div className="actions-edit-wrapper">
-                                                <button
-                                                    onClick={() => handleSaveRole(user._id, tempRole)}
-                                                    className="save-action-btn"
-                                                    title="Save Role"
-                                                >
-                                                    <CheckCircle size={16} />
-                                                </button>
-                                                <button
-                                                    onClick={() => setEditingUserId(null)}
-                                                    className="cancel-action-btn"
-                                                    title="Cancel"
-                                                >
-                                                    <X size={16} />
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <div className="actions-normal-wrapper">
-                                                <button
-                                                    onClick={() => { setEditingUserId(user._id); setTempRole(user.role); }}
-                                                    className="edit-action-btn"
-                                                    title="Change Role"
-                                                    disabled={user._id === auth?.id}
-                                                >
-                                                    <Edit2 size={16} />
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDelete(user._id, user.name)}
-                                                    className="delete-action-btn"
-                                                    title={user._id === auth?.id ? "Cannot delete yourself" : `Delete "${user.name}"`}
-                                                    disabled={user._id === auth?.id}
-                                                >
-                                                    <Trash2 size={16} />
-                                                </button>
-                                            </div>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+          {loading ? (
+            <div className="d-flex flex-column align-items-center justify-content-center py-5">
+              <div className="spinner-border text-primary mb-3" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p className="text-muted">Retrieving user profiles...</p>
+            </div>
+          ) : users.length === 0 ? (
+            <div className="card text-center p-5 border shadow-sm">
+              <User size={48} className="text-muted mb-3 mx-auto" />
+              <h3 className="h5 fw-bold text-dark">No Users Found</h3>
+              <p className="text-muted">There are no registered users in the database.</p>
+            </div>
+          ) : (
+            <div className="card shadow-sm border border-light overflow-hidden">
+              <div className="table-responsive">
+                <table className="table table-striped table-hover align-middle mb-0">
+                  <thead className="table-light">
+                    <tr>
+                      <th className="px-4 py-3 text-secondary text-uppercase fs-7 fw-bold">Profile</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">Name</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">Email Address</th>
+                      <th className="py-3 text-secondary text-uppercase fs-7 fw-bold">System Role</th>
+                      <th className="px-4 py-3 text-center text-secondary text-uppercase fs-7 fw-bold">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => (
+                      <tr key={user._id} className={user._id === auth?.id ? 'table-primary-subtle' : ''}>
+                        <td className="px-4 py-3">
+                          <div className="user-avatar-initials">
+                            {user.name ? user.name.charAt(0).toUpperCase() : '?'}
+                          </div>
+                        </td>
+                        <td className="py-3 fw-semibold text-dark">
+                          <span>{user.name}</span>
+                          {user._id === auth?.id && <span className="badge bg-primary ms-2 small">You</span>}
+                        </td>
+                        <td className="py-3 text-muted">
+                          <div className="d-flex align-items-center gap-1">
+                            <Mail size={16} className="text-secondary" />
+                            <span>{user.email}</span>
+                          </div>
+                        </td>
+                        <td className="py-3">
+                          {editingUserId === user._id ? (
+                            <div className="d-inline-block">
+                              <select
+                                value={tempRole}
+                                onChange={(e) => setTempRole(e.target.value)}
+                                className="form-select form-select-sm fw-semibold"
+                                style={{ width: '130px' }}
+                              >
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                                <option value="SuperAdmin">SuperAdmin</option>
+                              </select>
+                            </div>
+                          ) : (
+                            <span className={`badge ${user.role.toLowerCase() === 'superadmin' ? 'bg-purple-subtle text-purple border border-purple-subtle' : user.role.toLowerCase() === 'admin' ? 'bg-info-subtle text-info border border-info-subtle' : 'bg-secondary-subtle text-secondary'} py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small`}>
+                              <Shield size={12} />
+                              <span>{user.role}</span>
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          {editingUserId === user._id ? (
+                            <div className="d-flex justify-content-center gap-2">
+                              <button
+                                onClick={() => handleSaveRole(user._id, tempRole)}
+                                className="btn btn-sm btn-success py-1"
+                                title="Save Role"
+                              >
+                                <CheckCircle size={14} />
+                              </button>
+                              <button
+                                onClick={() => setEditingUserId(null)}
+                                className="btn btn-sm btn-secondary py-1"
+                                title="Cancel"
+                              >
+                                <X size={14} />
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="d-flex justify-content-center gap-2">
+                              <button
+                                onClick={() => { setEditingUserId(user._id); setTempRole(user.role); }}
+                                className="btn btn-sm btn-outline-primary"
+                                title="Change Role"
+                                disabled={user._id === auth?.id}
+                              >
+                                <Edit2 size={14} />
+                              </button>
+                              <button
+                                onClick={() => handleDelete(user._id, user.name)}
+                                className="btn btn-sm btn-outline-danger"
+                                title={user._id === auth?.id ? "Cannot delete yourself" : `Delete "${user.name}"`}
+                                disabled={user._id === auth?.id}
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default SuperUserList;
