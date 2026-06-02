@@ -35,7 +35,7 @@ function Version() {
         const projs = response.data.data;
         setProjects(projs);
 
-      
+
         const idToSelect = targetId || (location.state && location.state.projectId) || (projs.length > 0 ? projs[0]._id : null);
         if (idToSelect) {
           setSelectedProjectId(idToSelect);
@@ -53,7 +53,7 @@ function Version() {
     fetchProjects(startId);
   }, [location.state]);
 
-  
+
   const fetchProjectDetails = async (projectId) => {
     if (!projectId) {
       setProjectData(null);
@@ -73,7 +73,7 @@ function Version() {
         const proj = response.data.data;
         setProjectData(proj);
 
-       
+
         if (proj.versions && proj.versions.length > 0) {
           const latestVerObj = proj.versions[proj.versions.length - 1];
           setSelectedVersionNum(latestVerObj.versionNumber);
@@ -129,7 +129,7 @@ function Version() {
         setCode(latestVerObj.code);
         setIsEditing(false);
 
- 
+
         window.dispatchEvent(new Event('filesUpdated'));
       }
     } catch (err) {
@@ -166,7 +166,7 @@ function Version() {
         const updatedProj = response.data.data;
         setProjectData(updatedProj);
 
-      
+
         const remainingVersions = updatedProj.versions || [];
         if (remainingVersions.length > 0) {
           const stillExists = remainingVersions.some(v => v.versionNumber === selectedVersionNum);
@@ -180,7 +180,7 @@ function Version() {
         }
         setIsEditing(false);
 
-       
+
         window.dispatchEvent(new Event('filesUpdated'));
       }
     } catch (err) {
@@ -201,20 +201,20 @@ function Version() {
     });
   };
 
-  
+
   const getPreviousVersionObj = () => {
     if (!projectData || !projectData.versions || !selectedVersionNum) return null;
     const sorted = [...projectData.versions].sort((a, b) => b.versionNumber - a.versionNumber);
     return sorted.find(v => v.versionNumber < selectedVersionNum) || null;
   };
 
-  
+
   const diffResult = useMemo(() => {
     const prevVerObj = getPreviousVersionObj();
     if (!prevVerObj) return [];
 
-    const linesA = prevVerObj.code.split('\n');
-    const linesB = code.split('\n');
+    const linesA = prevVerObj.code.replace(/\r/g, '').split('\n');
+    const linesB = code.replace(/\r/g, '').split('\n');
     const n = linesA.length;
     const m = linesB.length;
 
@@ -233,14 +233,14 @@ function Version() {
     const diff = [];
     while (i > 0 || j > 0) {
       if (i > 0 && j > 0 && linesA[i - 1] === linesB[j - 1]) {
-        diff.unshift({ type: 'unchanged', text: linesA[i - 1] });
+        diff.unshift({ type: 'unchanged', text: linesA[i - 1], lineA: i, lineB: j });
         i--;
         j--;
       } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
-        diff.unshift({ type: 'added', text: linesB[j - 1] });
+        diff.unshift({ type: 'added', text: linesB[j - 1], lineA: '', lineB: j });
         j--;
       } else {
-        diff.unshift({ type: 'removed', text: linesA[i - 1] });
+        diff.unshift({ type: 'removed', text: linesA[i - 1], lineA: i, lineB: '' });
         i--;
       }
     }
@@ -250,7 +250,7 @@ function Version() {
 
   return (
     <div className="version-page-container">
-     
+
       <div className="versions-sidebar">
         <h3 className="panel-title">
           Version Control
@@ -315,7 +315,7 @@ function Version() {
         </div>
       </div>
 
-      
+
       <div className="code-workspace">
         {projectData ? (
           <div className="editor-container">
@@ -377,46 +377,30 @@ function Version() {
                 <div className="version-code-viewer code-monospace">
                   {getPreviousVersionObj() ? (
                     <div className="version-diff-lines">
-                      {(() => {
-                        let lineA = 0;
-                        let lineB = 0;
-                        return diffResult.map((line, idx) => {
-                          let displayA = '';
-                          let displayB = '';
-                          let marker = ' ';
-                          let className = '';
+                      {diffResult.map((line, idx) => {
+                        let className = '';
+                        let marker = ' ';
+                        if (line.type === 'added') {
+                          className = 'line-added';
+                          marker = '+';
+                        } else if (line.type === 'removed') {
+                          className = 'line-removed';
+                          marker = '-';
+                        }
 
-                          if (line.type === 'unchanged') {
-                            lineA++;
-                            lineB++;
-                            displayA = lineA;
-                            displayB = lineB;
-                          } else if (line.type === 'removed') {
-                            lineA++;
-                            displayA = lineA;
-                            className = 'line-removed';
-                            marker = '-';
-                          } else if (line.type === 'added') {
-                            lineB++;
-                            displayB = lineB;
-                            className = 'line-added';
-                            marker = '+';
-                          }
-
-                          return (
-                            <div key={idx} className={`version-diff-line-row ${className}`}>
-                              <span className="version-line-number number-a">{displayA}</span>
-                              <span className="version-line-number number-b">{displayB}</span>
-                              <span className="version-diff-line-marker">{marker}</span>
-                              <pre className="version-diff-line-content">{line.text || ' '}</pre>
-                            </div>
-                          );
-                        });
-                      })()}
+                        return (
+                          <div key={idx} className={`version-diff-line-row ${className}`}>
+                            <span className="version-line-number number-a">{line.lineA}</span>
+                            <span className="version-line-number number-b">{line.lineB}</span>
+                            <span className="version-diff-line-marker">{marker}</span>
+                            <pre className="version-diff-line-content">{line.text || ' '}</pre>
+                          </div>
+                        );
+                      })}
                     </div>
                   ) : (
                     <div className="version-plain-lines">
-                      {code.split('\n').map((line, idx) => (
+                      {code.replace(/\r/g, '').split('\n').map((line, idx) => (
                         <div key={idx} className="version-plain-line-row">
                           <span className="version-plain-line-number">{idx + 1}</span>
                           <span className="version-diff-line-marker"> </span>

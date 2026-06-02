@@ -487,18 +487,18 @@
 }
 
 .version-diff-line-row.line-added {
-  background-color: #fef2f2; 
+  background-color: #e6ffec; 
 }
 .version-diff-line-row.line-added .version-diff-line-content {
-  color: #991b1b; 
+  color: #1a7f37; 
 }
 .version-diff-line-row.line-added .version-diff-line-marker {
-  color: #ef4444;
-  background-color: #fee2e2;
+  color: #1a7f37;
+  background-color: #ccffd8;
 }
 .version-diff-line-row.line-added .version-line-number {
-  background-color: #fee2e2;
-  color: #ef4444;
+  background-color: #ccffd8;
+  color: #1a7f37;
 }
 
 @media (max-width: 767.98px) {
