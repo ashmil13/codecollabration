@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminService from '../../services/admin-services/Admin-Services';
 import SuperService from '../../services/superadmin-services/Super-Services';
 import UserService from '../../services/user-services/User-Service';
-import { Trash2, User, Mail, Shield, AlertCircle, CheckCircle, PlusCircle, ShieldAlert, Edit2, X } from 'lucide-react';
+
 import '../../css/superadminstyle/SuperUser.css';
 import useAuth from '../../hooks/useAuth';
 
@@ -155,7 +155,7 @@ function AdminSuper() {
                 <div className="col-12">
                     <header className="mb-4">
                         <div className="d-flex align-items-center gap-2">
-                            <ShieldAlert className="text-primary" size={28} />
+                            <i className="fa-solid fa-user-shield text-primary" style={{ fontSize: '28px' }}></i>
                             <div>
                                 <h1 className="h3 fw-bold mb-0">Manage Administrators</h1>
                                 <p className="text-muted mb-0 small">Create new administrators and manage system administrative credentials</p>
@@ -165,14 +165,14 @@ function AdminSuper() {
 
                     {error && (
                         <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-                            <AlertCircle size={20} />
+                             <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
                             <span>{error}</span>
                         </div>
                     )}
 
                     {successMsg && (
                         <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-                            <CheckCircle size={20} />
+                             <i className="fa-solid fa-circle-check" style={{ fontSize: '20px' }}></i>
                             <span>{successMsg}</span>
                         </div>
                     )}
@@ -182,7 +182,7 @@ function AdminSuper() {
                         <div className="col-12 col-lg-4">
                             <div className="card shadow-sm border border-light p-4 h-100">
                                 <div className="d-flex align-items-center gap-2 mb-3">
-                                    <PlusCircle size={20} className="text-primary" />
+                                     <i className="fa-solid fa-circle-plus text-primary" style={{ fontSize: '20px' }}></i>
                                     <h2 className="h5 fw-bold mb-0 text-dark">Register Admin</h2>
                                 </div>
                                 <p className="text-muted small mb-4">Add a new admin account to the system. They will have full read/write access to dashboard projects, users, and versions.</p>
@@ -238,7 +238,7 @@ function AdminSuper() {
                                             </>
                                         ) : (
                                             <>
-                                                <Shield size={18} />
+                                                 <i className="fa-solid fa-shield-halved" style={{ fontSize: '18px' }}></i>
                                                 <span>Create Admin Account</span>
                                             </>
                                         )}
@@ -252,7 +252,7 @@ function AdminSuper() {
                             <div className="card shadow-sm border border-light overflow-hidden h-100">
                                 <div className="card-header bg-white border-bottom-0 pt-4 px-4 pb-2">
                                     <div className="d-flex align-items-center gap-2">
-                                        <Shield size={20} className="text-primary" />
+                                         <i className="fa-solid fa-shield-halved text-primary" style={{ fontSize: '20px' }}></i>
                                         <h2 className="h5 fw-bold mb-0 text-dark">Active Administrators</h2>
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@ function AdminSuper() {
                                     </div>
                                 ) : admins.length === 0 ? (
                                     <div className="d-flex flex-column align-items-center justify-content-center py-5 h-100">
-                                        <Shield size={48} className="text-muted mb-3" />
+                                         <i className="fa-solid fa-shield-halved text-muted mb-3" style={{ fontSize: '48px' }}></i>
                                         <h3 className="h6 fw-bold text-dark">No Administrators Found</h3>
                                         <p className="text-muted small">No administrative accounts exist in the database.</p>
                                     </div>
@@ -296,7 +296,7 @@ function AdminSuper() {
                                                         </td>
                                                         <td className="py-3 text-muted">
                                                             <div className="d-flex align-items-center gap-1">
-                                                                <Mail size={16} className="text-secondary" />
+                                                                 <i className="fa-solid fa-envelope text-secondary" style={{ fontSize: '16px' }}></i>
                                                                 <span>{admin.email}</span>
                                                             </div>
                                                         </td>
@@ -315,7 +315,7 @@ function AdminSuper() {
                                                                 </div>
                                                             ) : (
                                                                 <span className="badge bg-info-subtle text-info border border-info-subtle py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small">
-                                                                    <Shield size={12} />
+                                                                    <i className="fa-solid fa-shield-halved" style={{ fontSize: '12px' }}></i>
                                                                     <span>{admin.role}</span>
                                                                 </span>
                                                             )}
@@ -328,14 +328,14 @@ function AdminSuper() {
                                                                         className="btn btn-sm btn-success py-1"
                                                                         title="Save Role"
                                                                     >
-                                                                        <CheckCircle size={14} />
+                                                                        <i className="fa-solid fa-circle-check" style={{ fontSize: '14px' }}></i>
                                                                     </button>
                                                                     <button
                                                                         onClick={() => setEditingUserId(null)}
                                                                         className="btn btn-sm btn-secondary py-1"
                                                                         title="Cancel"
                                                                     >
-                                                                        <X size={14} />
+                                                                        <i className="fa-solid fa-xmark" style={{ fontSize: '14px' }}></i>
                                                                     </button>
                                                                 </div>
                                                             ) : (
@@ -346,7 +346,7 @@ function AdminSuper() {
                                                                         title="Change Role"
                                                                         disabled={admin._id === auth?.id}
                                                                     >
-                                                                        <Edit2 size={14} />
+                                                                        <i className="fa-solid fa-pen-to-square" style={{ fontSize: '14px' }}></i>
                                                                     </button>
                                                                     <button
                                                                         onClick={() => handleDelete(admin._id, admin.name)}
@@ -354,7 +354,7 @@ function AdminSuper() {
                                                                         title={admin._id === auth?.id ? "Cannot delete yourself" : `Delete "${admin.name}"`}
                                                                         disabled={admin._id === auth?.id}
                                                                     >
-                                                                        <Trash2 size={14} />
+                                                                        <i className="fa-solid fa-trash" style={{ fontSize: '14px' }}></i>
                                                                     </button>
                                                                 </div>
                                                             )}

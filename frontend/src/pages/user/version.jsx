@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import UserService from '../../services/user-services/User-Service';
 import '../../css/userstyle/version.css';
-import { FileCode, GitBranch, Edit, Save, CheckCircle, AlertCircle, Trash2 } from 'lucide-react';
+
 
 function Version() {
   const {
@@ -289,7 +289,7 @@ function Version() {
                       title="Saved"
                       disabled={saving}
                     >
-                      <Save size={14} />
+                      <i className="fa-solid fa-floppy-disk" style={{ fontSize: '14px' }}></i>
                     </button>
                     <button
                       type="button"
@@ -301,7 +301,7 @@ function Version() {
                       title={`Delete Version ${v.versionNumber}`}
                       disabled={saving}
                     >
-                      <Trash2 size={14} />
+                      <i className="fa-solid fa-trash" style={{ fontSize: '14px' }}></i>
                     </button>
                   </div>
                 </div>
@@ -321,7 +321,7 @@ function Version() {
           <div className="editor-container">
             <div className="editor-header">
               <div className="editor-title-group">
-                <FileCode size={20} className="editor-title-icon" />
+                <i className="fa-solid fa-file-code editor-title-icon" style={{ fontSize: '20px' }}></i>
                 <div>
                   <h3 className="editor-project-name">{projectData.projectName}</h3>
                   <p className="editor-meta">
@@ -336,7 +336,7 @@ function Version() {
                   className={`editor-btn btn-edit ${isEditing ? 'editing' : ''}`}
                   title={isEditing ? "Lock Editing" : "Enable Editing"}
                 >
-                  <Edit size={16} />
+                  <i className="fa-solid fa-pen-to-square" style={{ fontSize: '16px' }}></i>
                   <span>{isEditing ? 'Lock Code' : 'Edit Code'}</span>
                 </button>
 
@@ -346,7 +346,7 @@ function Version() {
                   className="editor-btn btn-save"
                   title="Save as next version"
                 >
-                  <Save size={16} />
+                  <i className="fa-solid fa-floppy-disk" style={{ fontSize: '16px' }}></i>
                   <span>{saving ? 'Saving...' : 'Save Version'}</span>
                 </button>
               </div>
@@ -354,13 +354,13 @@ function Version() {
 
             {message && (
               <div className="alert alert-success">
-                <CheckCircle size={16} />
+                <i className="fa-solid fa-circle-check" style={{ fontSize: '16px' }}></i>
                 <span>{message}</span>
               </div>
             )}
             {error && (
               <div className="alert alert-error">
-                <AlertCircle size={16} />
+                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '16px' }}></i>
                 <span>{error}</span>
               </div>
             )}
@@ -415,7 +415,7 @@ function Version() {
           </div>
         ) : (
           <div className="editor-placeholder">
-            <FileCode size={48} className="placeholder-icon" />
+            <i className="fa-solid fa-file-code placeholder-icon" style={{ fontSize: '48px' }}></i>
             <h3>No File Selected</h3>
             <p>Select a project file from the left sidebar to display, edit, and track versions of your code.</p>
           </div>

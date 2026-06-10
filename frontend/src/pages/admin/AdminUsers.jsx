@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminService from '../../services/admin-services/Admin-Services';
-import { Trash2, User, Mail, Shield, AlertCircle, CheckCircle } from 'lucide-react';
+
 import '../../css/adminstyle/AdminUsers.css';
 import useAuth from '../../hooks/useAuth';
 
@@ -67,7 +67,7 @@ function AdminUserList() {
         <div className="col-12">
           <header className="mb-4">
             <div className="d-flex align-items-center gap-2">
-              <User className="text-primary" size={28} />
+              <i className="fa-solid fa-user text-primary" style={{ fontSize: '28px' }}></i>
               <div>
                 <h1 className="h3 fw-bold mb-0">Manage Users</h1>
                 <p className="text-muted mb-0 small">Control user accounts, track their system roles, and revoke access</p>
@@ -77,14 +77,14 @@ function AdminUserList() {
 
           {error && (
             <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <AlertCircle size={20} />
+              <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
             <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <CheckCircle size={20} />
+              <i className="fa-solid fa-circle-check" style={{ fontSize: '20px' }}></i>
               <span>{successMsg}</span>
             </div>
           )}
@@ -98,7 +98,7 @@ function AdminUserList() {
             </div>
           ) : users.length === 0 ? (
             <div className="card text-center p-5 border shadow-sm">
-              <User size={48} className="text-muted mb-3 mx-auto" />
+              <i className="fa-solid fa-user text-muted mb-3 mx-auto" style={{ fontSize: '48px', display: 'block' }}></i>
               <h3 className="h5 fw-bold text-dark">No Users Found</h3>
               <p className="text-muted">There are no registered users in the database.</p>
             </div>
@@ -129,13 +129,13 @@ function AdminUserList() {
                         </td>
                         <td className="py-3 text-muted">
                           <div className="d-flex align-items-center gap-1">
-                            <Mail size={16} className="text-secondary" />
+                            <i className="fa-solid fa-envelope text-secondary" style={{ fontSize: '16px' }}></i>
                             <span>{user.email}</span>
                           </div>
                         </td>
                         <td className="py-3">
                           <span className={`badge ${user.role.toLowerCase() === 'superadmin' ? 'bg-purple-subtle text-purple border border-purple-subtle' : user.role.toLowerCase() === 'admin' ? 'bg-info-subtle text-info border border-info-subtle' : 'bg-secondary-subtle text-secondary'} py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small`}>
-                            <Shield size={12} />
+                            <i className="fa-solid fa-shield-halved" style={{ fontSize: '12px' }}></i>
                             <span>{user.role}</span>
                           </span>
                         </td>
@@ -146,7 +146,7 @@ function AdminUserList() {
                             title={user._id === auth?.id ? "Cannot delete yourself" : `Delete "${user.name}"`}
                             disabled={user._id === auth?.id}
                           >
-                            <Trash2 size={16} />
+                            <i className="fa-solid fa-trash" style={{ fontSize: '16px' }}></i>
                           </button>
                         </td>
                       </tr>

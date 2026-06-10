@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminService from '../../services/admin-services/Admin-Services';
 import SuperService from '../../services/superadmin-services/Super-Services';
 
-import { Trash2, User, Mail, Shield, AlertCircle, CheckCircle, Edit2, X } from 'lucide-react';
+
 import '../../css/superadminstyle/SuperUser.css';
 import useAuth from '../../hooks/useAuth';
 
@@ -102,7 +102,7 @@ function SuperUserList() {
         <div className="col-12">
           <header className="mb-4">
             <div className="d-flex align-items-center gap-2">
-              <User className="text-primary" size={28} />
+              <i className="fa-solid fa-user text-primary" style={{ fontSize: '28px' }}></i>
               <div>
                 <h1 className="h3 fw-bold mb-0">Manage Users</h1>
                 <p className="text-muted mb-0 small">Control user accounts, track their system roles, and revoke access</p>
@@ -112,14 +112,14 @@ function SuperUserList() {
 
           {error && (
             <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <AlertCircle size={20} />
+              <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
             <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <CheckCircle size={20} />
+              <i className="fa-solid fa-circle-check" style={{ fontSize: '20px' }}></i>
               <span>{successMsg}</span>
             </div>
           )}
@@ -133,7 +133,7 @@ function SuperUserList() {
             </div>
           ) : users.length === 0 ? (
             <div className="card text-center p-5 border shadow-sm">
-              <User size={48} className="text-muted mb-3 mx-auto" />
+              <i className="fa-solid fa-user text-muted mb-3 mx-auto" style={{ fontSize: '48px', display: 'block' }}></i>
               <h3 className="h5 fw-bold text-dark">No Users Found</h3>
               <p className="text-muted">There are no registered users in the database.</p>
             </div>
@@ -164,7 +164,7 @@ function SuperUserList() {
                         </td>
                         <td className="py-3 text-muted">
                           <div className="d-flex align-items-center gap-1">
-                            <Mail size={16} className="text-secondary" />
+                            <i className="fa-solid fa-envelope text-secondary" style={{ fontSize: '16px' }}></i>
                             <span>{user.email}</span>
                           </div>
                         </td>
@@ -183,7 +183,7 @@ function SuperUserList() {
                             </div>
                           ) : (
                              <span className={`badge ${user.role.toLowerCase() === 'admin' ? 'bg-info-subtle text-info border border-info-subtle' : 'bg-secondary-subtle text-secondary'} py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small`}>
-                               <Shield size={12} />
+                               <i className="fa-solid fa-shield-halved" style={{ fontSize: '12px' }}></i>
                                <span>{user.role}</span>
                              </span>
                           )}
@@ -196,14 +196,14 @@ function SuperUserList() {
                                 className="btn btn-sm btn-success py-1"
                                 title="Save Role"
                               >
-                                <CheckCircle size={14} />
+                                <i className="fa-solid fa-circle-check" style={{ fontSize: '14px' }}></i>
                               </button>
                               <button
                                 onClick={() => setEditingUserId(null)}
                                 className="btn btn-sm btn-secondary py-1"
                                 title="Cancel"
                               >
-                                <X size={14} />
+                                <i className="fa-solid fa-xmark" style={{ fontSize: '14px' }}></i>
                               </button>
                             </div>
                           ) : (
@@ -214,7 +214,7 @@ function SuperUserList() {
                                 title="Change Role"
                                 disabled={user._id === auth?.id}
                               >
-                                <Edit2 size={14} />
+                                <i className="fa-solid fa-pen-to-square" style={{ fontSize: '14px' }}></i>
                               </button>
                               <button
                                 onClick={() => handleDelete(user._id, user.name)}
@@ -222,7 +222,7 @@ function SuperUserList() {
                                 title={user._id === auth?.id ? "Cannot delete yourself" : `Delete "${user.name}"`}
                                 disabled={user._id === auth?.id}
                               >
-                                <Trash2 size={14} />
+                                <i className="fa-solid fa-trash" style={{ fontSize: '14px' }}></i>
                               </button>
                             </div>
                           )}

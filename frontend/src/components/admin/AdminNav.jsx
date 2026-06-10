@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Folder, Users, GitBranch, LogOut, User } from 'lucide-react';
+
 import useAuth from '../../hooks/useAuth';
 import './AdminNav.css';
 
@@ -40,7 +40,7 @@ function AdminNav() {
                 {/* Top Profile section */}
                 <div className="admin-sidebar-user">
                     <div className="admin-avatar">
-                        <User size={24} />
+                        <i className="fa-solid fa-user" style={{ fontSize: '24px' }}></i>
                     </div>
                     <div className="admin-user-details">
                         <h3 className="admin-name">{auth?.name || "Admin"}</h3>
@@ -51,22 +51,22 @@ function AdminNav() {
                 {/* Navigation menu */}
                 <nav className="admin-sidebar-menu">
                     <NavLink to={`${prefix}/dashboard`} className="admin-menu-item" onClick={() => setIsOpen(false)}>
-                        <LayoutDashboard size={18} />
+                        <i className="fa-solid fa-gauge-high" style={{ fontSize: '18px' }}></i>
                         <span>Dashboard</span>
                     </NavLink>
 
                     <NavLink to={`${prefix}/projects`} className="admin-menu-item" onClick={() => setIsOpen(false)}>
-                        <Folder size={18} />
+                        <i className="fa-solid fa-folder" style={{ fontSize: '18px' }}></i>
                         <span>Projects</span>
                     </NavLink>
 
                     <NavLink to={`${prefix}/users`} className="admin-menu-item" onClick={() => setIsOpen(false)}>
-                        <Users size={18} />
+                        <i className="fa-solid fa-users" style={{ fontSize: '18px' }}></i>
                         <span>Users</span>
                     </NavLink>
 
                     <NavLink to={`${prefix}/versions`} className="admin-menu-item" onClick={() => setIsOpen(false)}>
-                        <GitBranch size={18} />
+                        <i className="fa-solid fa-code-branch" style={{ fontSize: '18px' }}></i>
                         <span>Versions</span>
                     </NavLink>
                 </nav>
@@ -74,7 +74,7 @@ function AdminNav() {
                 {/* Logout button at the bottom */}
                 <div className="admin-sidebar-bottom mt-auto">
                     <button onClick={handleLogout} className="admin-logout-btn">
-                        <LogOut size={18} />
+                        <i className="fa-solid fa-right-from-bracket" style={{ fontSize: '18px' }}></i>
                         <span>Logout</span>
                     </button>
                 </div>

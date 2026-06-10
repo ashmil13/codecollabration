@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminService from '../../services/admin-services/Admin-Services';
-import { Trash2, Folder, Calendar, User, AlertCircle, CheckCircle } from 'lucide-react';
+
 import '../../css/adminstyle/AdminProject.css';
 
 function SuperProject() {
@@ -59,7 +59,7 @@ function SuperProject() {
         <div className="col-12">
           <header className="mb-4">
             <div className="d-flex align-items-center gap-2">
-              <Folder className="text-primary" size={28} />
+              <i className="fa-solid fa-folder text-primary" style={{ fontSize: '28px' }}></i>
               <div>
                 <h1 className="h3 fw-bold mb-0">Manage Projects</h1>
                 <p className="text-muted mb-0 small">View, analyze, and remove repositories across the system</p>
@@ -69,14 +69,14 @@ function SuperProject() {
 
           {error && (
             <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <AlertCircle size={20} />
+              <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
             <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <CheckCircle size={20} />
+              <i className="fa-solid fa-circle-check" style={{ fontSize: '20px' }}></i>
               <span>{successMsg}</span>
             </div>
           )}
@@ -90,7 +90,7 @@ function SuperProject() {
             </div>
           ) : projects.length === 0 ? (
             <div className="card text-center p-5 border shadow-sm">
-              <Folder size={48} className="text-muted mb-3 mx-auto" />
+              <i className="fa-solid fa-folder text-muted mb-3 mx-auto" style={{ fontSize: '48px', display: 'block' }}></i>
               <h3 className="h5 fw-bold text-dark">No Projects Found</h3>
               <p className="text-muted">There are currently no code repositories uploaded to the system.</p>
             </div>
@@ -112,13 +112,13 @@ function SuperProject() {
                       <tr key={project._id}>
                         <td className="px-4 py-3 font-semibold text-dark">
                           <div className="d-flex align-items-center gap-2">
-                            <Folder className="text-primary opacity-75" size={18} />
+                            <i className="fa-solid fa-folder text-primary opacity-75" style={{ fontSize: '18px' }}></i>
                             <span>{project.projectName}</span>
                           </div>
                         </td>
                         <td className="py-3">
                           <div className="d-flex align-items-center gap-2 text-muted">
-                            <User size={16} />
+                            <i className="fa-solid fa-user" style={{ fontSize: '16px' }}></i>
                             <span>{project.user ? project.user.name : 'Unknown User'}</span>
                           </div>
                         </td>
@@ -134,7 +134,7 @@ function SuperProject() {
                             className="btn btn-sm btn-outline-danger"
                             title={`Delete "${project.projectName}"`}
                           >
-                            <Trash2 size={16} />
+                            <i className="fa-solid fa-trash" style={{ fontSize: '16px' }}></i>
                           </button>
                         </td>
                       </tr>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Upload, LogOut, User, File, Trash2, Pencil } from 'lucide-react';
+
 import useAuth from '../../hooks/useAuth';
 import UserService from '../../services/user-services/User-Service';
 import '../../css/userstyle/usersidebar.css';
@@ -113,7 +113,7 @@ function UserSidebar() {
             {auth?.name ? (
               <span className="avatar-initials">{auth.name.charAt(0).toUpperCase()}</span>
             ) : (
-              <User size={30} />
+              <i className="fa-solid fa-user" style={{ fontSize: '30px' }}></i>
             )}
           </div>
           <h3 className="user-name">{auth?.name || "Guest User"}</h3>
@@ -121,7 +121,7 @@ function UserSidebar() {
 
         <div className="sidebar-menu">
           <Link to="/user/upload" className="menu-item" onClick={() => setIsOpen(false)}>
-            <Upload size={20} />
+            <i className="fa-solid fa-upload" style={{ fontSize: '20px' }}></i>
             <span>Upload</span>
           </Link>
         </div>
@@ -138,7 +138,7 @@ function UserSidebar() {
                 return (
                   <li key={fileId || index} className="file-item" title={fileName}>
                     <div className="file-info" style={{ cursor: 'pointer' }} onClick={() => { if (fileId) { handleEditClick(fileId); setIsOpen(false); } }}>
-                      <File size={16} className="file-icon" />
+                      <i className="fa-solid fa-file file-icon" style={{ fontSize: '16px' }}></i>
                       <span className="file-name-text">{fileName}</span>
                     </div>
                     
@@ -149,7 +149,7 @@ function UserSidebar() {
                           className="edit-file-btn"
                           title="Edit / Version Control"
                         >
-                          <Pencil size={14} />
+                           <i className="fa-solid fa-pen-to-square" style={{ fontSize: '14px' }}></i>
                         </button>
                       )}
                       {fileId && (
@@ -158,7 +158,7 @@ function UserSidebar() {
                           className="delete-file-btn"
                           title="Delete project"
                         >
-                          <Trash2 size={14} />
+                           <i className="fa-solid fa-trash" style={{ fontSize: '14px' }}></i>
                         </button>
                       )}
                     </div>
@@ -173,7 +173,7 @@ function UserSidebar() {
 
         <div className="sidebar-bottom mt-auto">
           <button onClick={handleLogout} className="logout-btn">
-            <LogOut size={20} />
+            <i className="fa-solid fa-right-from-bracket" style={{ fontSize: '20px' }}></i>
             <span>Logout</span>
           </button>
         </div>

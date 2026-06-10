@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SuperService from '../../services/superadmin-services/Super-Services';
-import { Users, FolderGit2, AlertCircle, ShieldAlert, Shield } from 'lucide-react';
+
 import '../../css/adminstyle/AdminDashboard.css';
 
 function SuperDashboard() {
@@ -43,7 +43,7 @@ function SuperDashboard() {
         <div className="col-12">
           <header className="mb-4">
             <div className="d-flex align-items-center gap-2">
-              <ShieldAlert size={28} className="text-primary" /> 
+              <i className="fa-solid fa-user-shield text-primary" style={{ fontSize: '28px' }}></i> 
               <div>
                 <h1 className="h3 fw-bold mb-0">SuperAdmin Dashboard</h1>
                 <p className="text-muted mb-0 small">System Overview & Control Panel</p>
@@ -53,7 +53,7 @@ function SuperDashboard() {
 
           {error && (
             <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <AlertCircle size={20} />
+              <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
               <span>{error}</span>
             </div>
           )}
@@ -76,7 +76,7 @@ function SuperDashboard() {
                       <span className="text-muted small">Uploaded Repositories</span>
                     </div>
                     <div className="bg-light rounded p-3 text-secondary">
-                      <FolderGit2 size={32} />
+                      <i className="fa-solid fa-folder-open" style={{ fontSize: '32px' }}></i>
                     </div>
                   </div>
                   <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">
@@ -94,7 +94,7 @@ function SuperDashboard() {
                       <span className="text-muted small">System Admins</span>
                     </div>
                     <div className="bg-light rounded p-3 text-secondary">
-                      <Shield size={32} />
+                      <i className="fa-solid fa-shield-halved" style={{ fontSize: '32px' }}></i>
                     </div>
                   </div>
                   <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">

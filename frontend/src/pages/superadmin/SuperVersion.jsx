@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminService from '../../services/admin-services/Admin-Services';
-import { Trash2, GitBranch, Calendar, User, AlertCircle, CheckCircle, Folder } from 'lucide-react';
+
 import '../../css/adminstyle/AdminVersions.css';
 
 function SuperVersion() {
@@ -66,7 +66,7 @@ function SuperVersion() {
         <div className="col-12">
           <header className="mb-4">
             <div className="d-flex align-items-center gap-2">
-              <GitBranch className="text-primary" size={28} />
+              <i className="fa-solid fa-code-branch text-primary" style={{ fontSize: '28px' }}></i>
               <div>
                 <h1 className="h3 fw-bold mb-0">Manage Project Versions</h1>
                 <p className="text-muted mb-0 small">Track history files, code commits, and delete redundant versions</p>
@@ -76,14 +76,14 @@ function SuperVersion() {
 
           {error && (
             <div className="alert alert-danger d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <AlertCircle size={20} />
+              <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '20px' }}></i>
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
             <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4" role="alert">
-              <CheckCircle size={20} />
+              <i className="fa-solid fa-circle-check" style={{ fontSize: '20px' }}></i>
               <span>{successMsg}</span>
             </div>
           )}
@@ -91,7 +91,7 @@ function SuperVersion() {
           {!loading && versions.length > 0 && (
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 p-3 bg-white border rounded shadow-sm">
               <div className="d-flex align-items-center gap-2">
-                <span className="text-secondary"><Folder size={18} /></span>
+                <span className="text-secondary"><i className="fa-solid fa-folder" style={{ fontSize: '18px' }}></i></span>
                 <label htmlFor="project-filter" className="fw-semibold text-secondary small mb-0">Project:</label>
                 <select
                   id="project-filter"
@@ -122,13 +122,13 @@ function SuperVersion() {
             </div>
           ) : versions.length === 0 ? (
             <div className="card text-center p-5 border shadow-sm">
-              <GitBranch size={48} className="text-muted mb-3 mx-auto" />
+              <i className="fa-solid fa-code-branch text-muted mb-3 mx-auto" style={{ fontSize: '48px', display: 'block' }}></i>
               <h3 className="h5 fw-bold text-dark">No Versions Found</h3>
               <p className="text-muted">There are currently no code versions tracked in the database.</p>
             </div>
           ) : filteredVersions.length === 0 ? (
             <div className="card text-center p-5 border shadow-sm">
-              <GitBranch size={48} className="text-muted mb-3 mx-auto" />
+              <i className="fa-solid fa-code-branch text-muted mb-3 mx-auto" style={{ fontSize: '48px', display: 'block' }}></i>
               <h3 className="h5 fw-bold text-dark">No Versions for "{selectedProjectName}"</h3>
               <p className="text-muted">There are no code versions for the selected project.</p>
             </div>
@@ -150,7 +150,7 @@ function SuperVersion() {
                       <tr key={v._id}>
                         <td className="px-4 py-3 font-semibold text-dark">
                           <div className="d-flex align-items-center gap-2">
-                            <Folder className="text-primary opacity-75" size={16} />
+                            <i className="fa-solid fa-folder text-primary opacity-75" style={{ fontSize: '16px' }}></i>
                             <span>{v.projectName || 'Legacy Project'}</span>
                           </div>
                         </td>
@@ -159,7 +159,7 @@ function SuperVersion() {
                         </td>
                         <td className="py-3 text-muted">
                           <div className="d-flex align-items-center gap-1">
-                            <User size={14} className="text-secondary" />
+                            <i className="fa-solid fa-user text-secondary" style={{ fontSize: '14px' }}></i>
                             <span>{v.userName || 'Unknown User'}</span>
                           </div>
                         </td>
@@ -172,7 +172,7 @@ function SuperVersion() {
                             className="btn btn-sm btn-outline-danger"
                             title={`Delete Version ${v.versionNumber}`}
                           >
-                            <Trash2 size={16} />
+                            <i className="fa-solid fa-trash" style={{ fontSize: '16px' }}></i>
                           </button>
                         </td>
                       </tr>
