@@ -67,7 +67,7 @@ function SuperDashboard() {
             </div>
           ) : (
             <div className="row g-4">
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-4">
                 <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/projects')}>
                   <div className="card-body p-4 d-flex justify-content-between align-items-center">
                     <div className="d-flex flex-column">
@@ -85,7 +85,25 @@ function SuperDashboard() {
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-4">
+                <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/users')}>
+                  <div className="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div className="d-flex flex-column">
+                      <span className="text-uppercase text-muted fw-bold small mb-1">Standard Users</span>
+                      <h2 className="display-6 fw-bold text-dark mb-1">{stats.totalUsers || 0}</h2>
+                      <span className="text-muted small">Standard Accounts</span>
+                    </div>
+                    <div className="bg-light rounded p-3 text-secondary">
+                      <i className="fa-solid fa-users" style={{ fontSize: '32px' }}></i>
+                    </div>
+                  </div>
+                  <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">
+                    <span className="text-primary fw-semibold small">View all users</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-md-4">
                 <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/admins')}>
                   <div className="card-body p-4 d-flex justify-content-between align-items-center">
                     <div className="d-flex flex-column">
