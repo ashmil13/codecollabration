@@ -41,7 +41,8 @@ export const protect = async (req, res, next) => {
 };
 
 export const adminOnly = (req, res, next) => {
-  if (req.user && (req.user.role === 'Admin' || req.user.role === 'SuperAdmin' || req.user.isAdmin || req.user.isSuperAdmin)) {
+  const role = req.user && req.user.role ? req.user.role.toLowerCase() : '';
+  if (req.user && (role === 'admin' || role === 'superadmin' || req.user.isAdmin || req.user.isSuperAdmin)) {
     next();
   } else {
     res.status(403).json({ success: false, error: 'Access denied: Admins only' });
@@ -49,7 +50,8 @@ export const adminOnly = (req, res, next) => {
 };
 
 export const superAdminOnly = (req, res, next) => {
-  if (req.user && (req.user.role === 'SuperAdmin' || req.user.isSuperAdmin)) {
+  const role = req.user && req.user.role ? req.user.role.toLowerCase() : '';
+  if (req.user && (role === 'superadmin' || req.user.isSuperAdmin)) {
     next();
   } else {
     res.status(403).json({ success: false, error: 'Access denied: SuperAdmins only' });

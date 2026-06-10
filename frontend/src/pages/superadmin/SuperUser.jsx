@@ -23,7 +23,8 @@ function SuperUserList() {
             setError('');
             const response = await getAllUsers();
             if (response.data && response.data.success) {
-                setUsers(response.data.data);
+                const onlyUsers = response.data.data.filter(u => u.role?.toLowerCase() === 'user');
+                setUsers(onlyUsers);
             } else {
                 setError('Failed to fetch users list');
             }
@@ -178,14 +179,13 @@ function SuperUserList() {
                               >
                                 <option value="User">User</option>
                                 <option value="Admin">Admin</option>
-                                <option value="SuperAdmin">SuperAdmin</option>
                               </select>
                             </div>
                           ) : (
-                            <span className={`badge ${user.role.toLowerCase() === 'superadmin' ? 'bg-purple-subtle text-purple border border-purple-subtle' : user.role.toLowerCase() === 'admin' ? 'bg-info-subtle text-info border border-info-subtle' : 'bg-secondary-subtle text-secondary'} py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small`}>
-                              <Shield size={12} />
-                              <span>{user.role}</span>
-                            </span>
+                             <span className={`badge ${user.role.toLowerCase() === 'admin' ? 'bg-info-subtle text-info border border-info-subtle' : 'bg-secondary-subtle text-secondary'} py-1.5 px-2.5 rounded d-inline-flex align-items-center gap-1 small`}>
+                               <Shield size={12} />
+                               <span>{user.role}</span>
+                             </span>
                           )}
                         </td>
                         <td className="px-4 py-3 text-center">

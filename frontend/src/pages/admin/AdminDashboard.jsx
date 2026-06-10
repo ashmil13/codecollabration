@@ -64,9 +64,9 @@ function AdminDashboard() {
                 <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }}>
                   <div className="card-body p-4 d-flex justify-content-between align-items-center">
                     <div className="d-flex flex-column">
-                      <span className="text-uppercase text-muted fw-bold small mb-1">Total Users</span>
+                      <span className="text-uppercase text-muted fw-bold small mb-1">Users</span>
                       <h2 className="display-6 fw-bold text-dark mb-1">{stats.totalUsers}</h2>
-                      <span className="text-muted small">Registered Accounts</span>
+                      <span className="text-muted small">Standard Accounts</span>
                     </div>
                     <div className="bg-light rounded p-3 text-secondary">
                       <Users size={32} />

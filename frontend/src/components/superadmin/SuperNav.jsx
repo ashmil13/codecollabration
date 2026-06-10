@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Folder, Users, GitBranch, LogOut, User } from 'lucide-react';
+import { LayoutDashboard, Folder, Users, GitBranch, LogOut, User, Shield } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
 import '../../css/superadminstyle/SuperNav.css';
 
@@ -63,6 +63,11 @@ function SuperNav() {
                     <NavLink to="/superadmin/users" className="admin-menu-item" onClick={() => setIsOpen(false)}>
                         <Users size={18} />
                         <span>Users</span>
+                    </NavLink>
+
+                    <NavLink to="/superadmin/admins" className="admin-menu-item" onClick={() => setIsOpen(false)}>
+                        <Shield size={18} />
+                        <span>Admins</span>
                     </NavLink>
 
                     <NavLink to="/superadmin/versions" className="admin-menu-item" onClick={() => setIsOpen(false)}>

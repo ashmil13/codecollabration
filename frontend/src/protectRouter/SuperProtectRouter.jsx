@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 function SuperProtectedRouter() {
   const { auth } = useAuth();
 
-  const isAuthorized = auth?.accessToken && (auth?.role === 'SuperAdmin' || auth?.isSuperAdmin);
+  const isAuthorized = auth?.accessToken && (auth?.role?.toLowerCase() === 'superadmin' || auth?.isSuperAdmin);
 
   return isAuthorized ? <Outlet /> : <Navigate to="/login" replace />;
 }

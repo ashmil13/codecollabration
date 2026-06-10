@@ -13,10 +13,13 @@ const SuperService = () => {
         const response = await axiosPrivate.get("/api/superadmin/stats");
         return response;
     };
+    
+
 
     return {
         updateUserRole,
-        getSuperAdminStats
+        getSuperAdminStats,
+      
     };
 }
 

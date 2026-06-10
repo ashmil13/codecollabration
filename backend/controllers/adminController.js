@@ -5,10 +5,10 @@ import Version from '../models/version.js';
 
 export const getAdminStats = async (req, res, next) => {
   try {
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await User.countDocuments({ role: { $nin: ['admin', 'Admin', 'superadmin', 'SuperAdmin'] } });
     const totalProjects = await Project.countDocuments();
-    const totalAdmins = await User.countDocuments({ role: 'Admin' });
-    const totalSuperAdmins = await User.countDocuments({ role: 'SuperAdmin' });
+    const totalAdmins = await User.countDocuments({ role: { $in: ['admin', 'Admin'] } });
+    const totalSuperAdmins = await User.countDocuments({ role: { $in: ['superadmin', 'SuperAdmin'] } });
 
     return res.status(200).json({
       success: true,

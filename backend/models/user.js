@@ -26,8 +26,8 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['User', 'Admin', 'SuperAdmin'],
-    default: 'User'
+    enum: ['user', 'admin', 'superadmin'],
+    default: 'user'
   },
   isAdmin: {
     type: Boolean,
@@ -46,27 +46,19 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre('save', async function (next) {
-  if (this.role === 'SuperAdmin') {
+  const normalizedRole = this.role ? this.role.toLowerCase() : 'user';
+  if (normalizedRole === 'superadmin') {
     this.isSuperAdmin = true;
     this.isAdmin = true;
-  } else if (this.role === 'Admin') {
+    this.role = 'superadmin';
+  } else if (normalizedRole === 'admin') {
     this.isSuperAdmin = false;
     this.isAdmin = true;
-  } else if (this.role === 'User') {
+    this.role = 'admin';
+  } else {
     this.isSuperAdmin = false;
     this.isAdmin = false;
-  } else {
-    if (this.isSuperAdmin) {
-      this.role = 'SuperAdmin';
-      this.isAdmin = true;
-    } else if (this.isAdmin) {
-      this.role = 'Admin';
-      this.isSuperAdmin = false;
-    } else {
-      this.role = 'User';
-      this.isAdmin = false;
-      this.isSuperAdmin = false;
-    }
+    this.role = 'user';
   }
 
   if (!this.isModified('password')) {

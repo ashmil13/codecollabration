@@ -21,6 +21,7 @@ import SuperProjectList from './pages/superadmin/SuperProject';
 import SuperUserList from './pages/superadmin/SuperUser';
 import SuperLayout from './layout/superadminlayout/SuperLayout';
 import SuperVersionList from './pages/superadmin/SuperVersion';
+import AdminSuper from './pages/superadmin/AdminSuper';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               <Route path="/superadmin/dashboard" element={<SuperDashboard />} />
               <Route path="/superadmin/projects" element={<SuperProjectList />} />
               <Route path="/superadmin/users" element={<SuperUserList />} />
+              <Route path="/superadmin/admins" element={<AdminSuper />} />
               <Route path="/superadmin/versions" element={<SuperVersionList />} />
             </Route>
           </Route>

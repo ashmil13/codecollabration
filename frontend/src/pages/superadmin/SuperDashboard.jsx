@@ -67,29 +67,11 @@ function SuperDashboard() {
             </div>
           ) : (
             <div className="row g-4">
-              <div className="col-12 col-sm-6 col-lg-3">
-                <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/users')}>
-                  <div className="card-body p-4 d-flex justify-content-between align-items-center">
-                    <div className="d-flex flex-column">
-                      <span className="text-uppercase text-muted fw-bold small mb-1">Total Users</span>
-                      <h2 className="display-6 fw-bold text-dark mb-1">{stats.totalUsers}</h2>
-                      <span className="text-muted small">Registered Accounts</span>
-                    </div>
-                    <div className="bg-light rounded p-3 text-secondary">
-                      <Users size={32} />
-                    </div>
-                  </div>
-                  <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">
-                    <span className="text-primary fw-semibold small">View all users</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-12 col-sm-6 col-lg-3">
+              <div className="col-12 col-md-6">
                 <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/projects')}>
                   <div className="card-body p-4 d-flex justify-content-between align-items-center">
                     <div className="d-flex flex-column">
-                      <span className="text-uppercase text-muted fw-bold small mb-1">Total Projects</span>
+                      <span className="text-uppercase text-muted fw-bold small mb-1">Projects</span>
                       <h2 className="display-6 fw-bold text-dark mb-1">{stats.totalProjects}</h2>
                       <span className="text-muted small">Uploaded Repositories</span>
                     </div>
@@ -103,8 +85,8 @@ function SuperDashboard() {
                 </div>
               </div>
 
-              <div className="col-12 col-sm-6 col-lg-3">
-                <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/users')}>
+              <div className="col-12 col-md-6">
+                <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/admins')}>
                   <div className="card-body p-4 d-flex justify-content-between align-items-center">
                     <div className="d-flex flex-column">
                       <span className="text-uppercase text-muted fw-bold small mb-1">Admin Users</span>
@@ -117,24 +99,6 @@ function SuperDashboard() {
                   </div>
                   <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">
                     <span className="text-primary fw-semibold small">View all admins</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-12 col-sm-6 col-lg-3">
-                <div className="card shadow-sm h-100 border-0 stat-card" style={{ cursor: 'pointer' }} onClick={() => navigate('/superadmin/users')}>
-                  <div className="card-body p-4 d-flex justify-content-between align-items-center">
-                    <div className="d-flex flex-column">
-                      <span className="text-uppercase text-muted fw-bold small mb-1">SuperAdmins</span>
-                      <h2 className="display-6 fw-bold text-dark mb-1">{stats.totalSuperAdmins || 0}</h2>
-                      <span className="text-muted small">System Directors</span>
-                    </div>
-                    <div className="bg-light rounded p-3 text-secondary">
-                      <ShieldAlert size={32} />
-                    </div>
-                  </div>
-                  <div className="card-footer bg-light border-top-0 d-flex justify-content-end py-2 px-4">
-                    <span className="text-primary fw-semibold small">View all superadmins</span>
                   </div>
                 </div>
               </div>

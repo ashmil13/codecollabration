@@ -1,13 +1,13 @@
-import User from '../models/superAdmin.js';
+import User from '../models/user.js';
 import Project from '../models/project.js';
 
 
 export const getSuperAdminStats = async (req, res, next) => {
   try {
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await User.countDocuments({ role: { $nin: ['admin', 'Admin', 'superadmin', 'SuperAdmin'] } });
     const totalProjects = await Project.countDocuments();
-    const totalAdmins = await User.countDocuments({ role: 'Admin' });
-    const totalSuperAdmins = await User.countDocuments({ role: 'SuperAdmin' });
+    const totalAdmins = await User.countDocuments({ role: { $in: ['admin', 'Admin'] } });
+    const totalSuperAdmins = await User.countDocuments({ role: { $in: ['superadmin', 'SuperAdmin'] } });
 
     return res.status(200).json({
       success: true,
@@ -29,8 +29,9 @@ export const updateUserRole = async (req, res, next) => {
     const { role } = req.body;
     const userId = req.params.id;
 
-    const validRoles = ['User', 'Admin', 'SuperAdmin'];
-    if (!role || !validRoles.includes(role)) {
+    const validRoles = ['user', 'admin', 'superadmin'];
+    const normalizedRole = role ? role.toLowerCase() : '';
+    if (!role || !validRoles.includes(normalizedRole)) {
       return res.status(400).json({
         success: false,
         error: `Invalid role. Allowed roles are: ${validRoles.join(', ')}`
@@ -38,18 +39,12 @@ export const updateUserRole = async (req, res, next) => {
     }
 
 
-    let isAdmin = false;
-    let isSuperAdmin = false;
-    if (role === 'SuperAdmin') {
-      isAdmin = true;
-      isSuperAdmin = true;
-    } else if (role === 'Admin') {
-      isAdmin = true;
-    }
+    let isAdmin = normalizedRole === 'admin' || normalizedRole === 'superadmin';
+    let isSuperAdmin = normalizedRole === 'superadmin';
 
     const user = await User.findByIdAndUpdate(
       userId,
-      { role, isAdmin, isSuperAdmin },
+      { role: normalizedRole, isAdmin, isSuperAdmin },
       { new: true, runValidators: false }
     );
 
@@ -76,3 +71,5 @@ export const updateUserRole = async (req, res, next) => {
     next(error);
   }
 };
+
+

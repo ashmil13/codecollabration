@@ -16,20 +16,37 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin:["http://localhost:5173",process.env.FRONTEND_URL],
+  origin: ["http://localhost:5173", process.env.FRONTEND_URL],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Projects API" });
-});
+
 app.use('/api', userRouter);
 app.use('/api', projectRouter);
 app.use('/api', versionRouter);
 app.use('/api', adminRouter);
 app.use('/api', superAdminRouter);
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error occurred:', err);
+
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map(val => val.message).join(', ');
+    return res.status(400).json({ success: false, error: message });
+  }
+
+  if (err.code === 11000) {
+    return res.status(400).json({ success: false, error: 'User with this email already exists' });
+  }
+
+  res.status(err.statusCode || 500).json({
+    success: false,
+    error: err.message || 'Internal Server Error'
+  });
+});
 
 
 

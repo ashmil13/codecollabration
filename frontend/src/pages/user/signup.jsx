@@ -10,7 +10,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState('User'); 
+  const [role, setRole] = useState('user'); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -37,7 +37,7 @@ function Signup() {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-        setRole('User');
+        setRole('user');
       } else {
         throw new Error(data.error || "Registration failed.");
       }
@@ -83,19 +83,6 @@ function Signup() {
                   />
                 </div>
 
-                <div className="mb-3 text-start">
-                  <label className="form-label fw-semibold text-secondary small">Role Category</label>
-                  <select 
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="form-select fs-6" 
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                    <option value="SuperAdmin">SuperAdmin</option>
-                  </select>
-                </div>
                 
                 <div className="mb-3 text-start">
                   <label className="form-label fw-semibold text-secondary small">Password</label>

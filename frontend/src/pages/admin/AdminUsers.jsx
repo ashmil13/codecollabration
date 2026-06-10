@@ -18,7 +18,8 @@ function AdminUserList() {
       setError('');
       const response = await getAllUsers();
       if (response.data && response.data.success) {
-        setUsers(response.data.data);
+        const onlyUsers = response.data.data.filter(u => u.role?.toLowerCase() === 'user');
+        setUsers(onlyUsers);
       } else {
         setError('Failed to fetch users list');
       }

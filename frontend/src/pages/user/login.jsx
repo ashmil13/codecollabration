@@ -26,16 +26,18 @@ function Login() {
 
       if (data && data.success) {
         localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("role", data.role || "User");
+        localStorage.setItem("role", data.role || "user");
         localStorage.setItem("isAdmin", data.isAdmin ? "true" : "false");
         localStorage.setItem("isSuperAdmin", data.isSuperAdmin ? "true" : "false");
         localStorage.setItem("userId", data.userId || "");
         localStorage.setItem("name", data.name || "");
         localStorage.setItem("profileImage", data.profileImage || "");
 
+        const normalizedRole = data.role ? data.role.toLowerCase() : "user";
+
         setAuth({
           accessToken: data.accessToken,
-          role: data.role || "User",
+          role: normalizedRole,
           isAdmin: !!data.isAdmin,
           isSuperAdmin: !!data.isSuperAdmin,
           id: data.userId,
@@ -46,9 +48,9 @@ function Login() {
      
 
         alert("Login successful!");
-        if (data.role === 'SuperAdmin' || data.isSuperAdmin) {
+        if (normalizedRole === 'superadmin' || data.isSuperAdmin) {
           navigate('/superadmin/dashboard');
-        } else if (data.role === 'Admin' || data.isAdmin) {
+        } else if (normalizedRole === 'admin' || data.isAdmin) {
           navigate('/admin/dashboard');
         } else {
           navigate('/user/upload');
